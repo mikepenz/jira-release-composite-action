@@ -1,0 +1,19 @@
+{
+    "configCacheDir": "cache/",
+    "jiraInstance": "https://org.atlassian.net/",
+    "title": "[A] Test ",
+    "descriptionPlaceholder": "## 🚀 Features\n\n- Equal to previous tag\n\n## 🐛 Fixes\n\n- /",
+    "releaseBaseUrl": "https://github.com/org/repo/releases/tag/",
+    "releaseAssignee": "123456:123e786f-abc1-abc1-abc1-12345677",
+    "releaseProject": "PROJ",
+    "associatedProjects": [
+        "PROJ",
+        "PROJ2"
+    ],
+    "fallbackNextVersion": false,
+    "fallbackNextVersionName": "next",
+    "versionBase": "android_",
+    "prBaseUrl": "https://github.com/org/repo/pull/",
+    "pluginDirectory": "plugins/",
+    "projectDirectory": "/some/absolute/path/to/project/"
+}
