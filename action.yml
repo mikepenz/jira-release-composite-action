@@ -32,6 +32,6 @@ runs:
   steps: 
     - id: jira-release-ticket-creator
       run: |
-        java -jar ${{ github.action_path }}/scripts/jira_magic-2.0.3.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${{ inputs.changeLog }}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "${{ inputs.demoMode }}"
+        java -jar ${{ github.action_path }}/scripts/jira_magic-2.0.4.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${{ inputs.changeLog }}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "${{ inputs.demoMode }}"
         echo "::set-output name=release-ticket-id::$(cat ${{ inputs.cachesDirectory }}/release.txt)"
       shell: bash
