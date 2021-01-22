@@ -52,7 +52,7 @@ Additionally specify the configuration file `${{ github.workspace }}/.github/con
 }
 ```
 
-# Sample outuput
+# Sample output
 
 ```
 Project directory: /home/runner/work/yourProject/yourProject
@@ -92,6 +92,12 @@ Update release versions
 -- Couldn't find id for release (PROJ1) - android_2020.10.15-a01
 -- Couldn't find id for release (PROJ2) - android_2020.10.15-a01
 ```
+
+## Other actions
+
+- [release-changelog-builder-action](https://github.com/mikepenz/release-changelog-builder-action)
+- [xray-action](https://github.com/mikepenz/xray-action/)
+- [action-junit-report](https://github.com/mikepenz/action-junit-report)
 
 
 # License
