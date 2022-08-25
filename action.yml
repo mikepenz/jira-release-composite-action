@@ -1,0 +1,43 @@
+name: 'Jira Release'
+description: 'Creates a jira release ticket, given release notes as input.'
+inputs:
+  releaseVersion:
+    description: 'The version this release gets. E.g.: 2022.1.0'
+    required: true
+  projectDirectory:
+    description: 'The directory of the project. Also the root of this scripts execution'
+    required: true
+  configurationDirectory:
+    description: 'The directory which hosts the `jira_magic_config.json` file'
+    required: true
+  cachesDirectory:
+    description: 'The directory which will contain all written caches'
+    required: true
+  changeLog:
+    description: 'The changelog to parse, and create the release ticket with'
+    required: true
+  jiraToken:
+    description: 'The Jira token to use to create the release ticket'
+    required: true
+  demoMode:
+    description: 'Allows to enable a demo mode, not creating any ticket. Keep empty to not enable'
+    required: true
+    default: ''
+outputs:
+  release-ticket-id: 
+    description: "Release ticket"
+    value: ${{ steps.jira-release-ticket-creator.outputs.release-ticket-id }}
+  release-version-meta: 
+    description: "Release version meta data"
+    value: ${{ steps.jira-release-ticket-creator.outputs.release-version-meta }}
+runs:
+  using: "composite"
+  steps: 
+    - id: jira-release-ticket-creator
+      shell: bash
+      run: |
+        java -jar ${{ github.action_path }}/scripts/jira_magic-2.2.2.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${{ CHANGELOG }}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "${{ inputs.demoMode }}"
+        echo "::set-output name=release-ticket-id::$(cat ${{ inputs.cachesDirectory }}/release.txt)"
+        echo "::set-output name=release-version-meta::$(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)"
+      env:
+        CHANGELOG: ${{ inputs.changeLog }}
