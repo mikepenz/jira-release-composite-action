@@ -15,5 +15,6 @@
     "versionBase": "android_",
     "prBaseUrl": "https://github.com/org/repo/pull/",
     "pluginDirectory": "plugins/",
-    "projectDirectory": "/some/absolute/path/to/project/"
+    "projectDirectory": "/some/absolute/path/to/project/",
+    "migrateTickets": true
 }
