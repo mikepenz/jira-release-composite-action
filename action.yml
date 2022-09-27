@@ -36,7 +36,7 @@ runs:
     - id: jira-release-ticket-creator
       shell: bash
       run: |
-        if [[ ( $DEMO_MODE == 'true' || $DEMO_MODE == "1" ) ]]; then
+        if [[ ( $DEMO_MODE == "true" || $DEMO_MODE == "1" ) ]]; then
             DM="1"
         else
             DM=""
