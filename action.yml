@@ -20,7 +20,7 @@ inputs:
     description: 'The Jira token to use to create the release ticket'
     required: true
   demoMode:
-    description: 'Allows to enable a demo mode, not creating any ticket. Keep empty to not enable'
+    description: 'Allows to enable a demo mode, not creating any ticket. Set to "true" or "1" to enable'
     required: true
     default: ''
 outputs:
@@ -36,8 +36,15 @@ runs:
     - id: jira-release-ticket-creator
       shell: bash
       run: |
-        java -jar ${{ github.action_path }}/scripts/jira_magic-2.2.4.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "${{ inputs.demoMode }}"
+        if [[ ( $DEMO_MODE == 'true' || $DEMO_MODE == "1" ) ]]; then
+            DM="1"
+        else
+            DM=""
+        fi
+
+        java -jar ${{ github.action_path }}/scripts/jira_magic-2.2.4.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
         echo "::set-output name=release-ticket-id::$(cat ${{ inputs.cachesDirectory }}/release.txt)"
         echo "::set-output name=release-version-meta::$(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)"
       env:
         CHANGELOG: ${{ inputs.changeLog }}
+        DEMO_MODE: ${{ inputs.demoMode }}
