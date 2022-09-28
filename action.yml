@@ -43,7 +43,12 @@ runs:
         fi
 
         java -jar ${{ github.action_path }}/scripts/jira_magic-2.2.4.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
-        echo "::set-output name=release-ticket-id::$(cat ${{ inputs.cachesDirectory }}/release.txt)"
+
+        if [[ -e "${{ inputs.cachesDirectory }}/release.txt" ]]; then
+          echo "::set-output name=release-ticket-id::$(cat ${{ inputs.cachesDirectory }}/release.txt)"
+        else
+          echo "::set-output name=release-ticket-id::"
+        fi
         echo "::set-output name=release-version-meta::$(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)"
       env:
         CHANGELOG: ${{ inputs.changeLog }}
