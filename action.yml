@@ -2,7 +2,7 @@ name: 'Jira Release'
 description: 'Creates a jira release ticket, given release notes as input.'
 inputs:
   releaseVersion:
-    description: 'The version this release gets. E.g.: 2022.1.0'
+    description: 'The version this release gets. E.g.: 2023.1.0'
     required: true
   projectDirectory:
     description: 'The directory of the project. Also the root of this scripts execution'
@@ -42,14 +42,14 @@ runs:
             DM=""
         fi
 
-        java -jar ${{ github.action_path }}/scripts/jira_magic-2.2.4.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
+        java -jar ${{ github.action_path }}/scripts/jira_magic-2.3.0-r8.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
 
         if [[ -e "${{ inputs.cachesDirectory }}/release.txt" ]]; then
-          echo "::set-output name=release-ticket-id::$(cat ${{ inputs.cachesDirectory }}/release.txt)"
+          echo "release-ticket-id=$(cat ${{ inputs.cachesDirectory }}/release.txt)" >> $GITHUB_OUTPUT
         else
-          echo "::set-output name=release-ticket-id::"
+          echo "release-ticket-id=" >> $GITHUB_OUTPUT
         fi
-        echo "::set-output name=release-version-meta::$(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)"
+        echo "release-version-meta=$(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)" >> $GITHUB_OUTPUT
       env:
         CHANGELOG: ${{ inputs.changeLog }}
         DEMO_MODE: ${{ inputs.demoMode }}
