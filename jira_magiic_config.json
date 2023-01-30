@@ -16,5 +16,9 @@
     "prBaseUrl": "https://github.com/org/repo/pull/",
     "pluginDirectory": "plugins/",
     "projectDirectory": "/some/absolute/path/to/project/",
-    "migrateTickets": true
+    "migrateTickets": true,
+    "customReleaseFields": {
+      "customfield_12345": [ { "value": "Android" } ],
+      "customfield_12346": [ "YES" ]
+    }
 }
