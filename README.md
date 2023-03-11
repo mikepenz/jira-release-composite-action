@@ -48,7 +48,13 @@ Additionally specify the configuration file `${{ github.workspace }}/.github/con
   "fallbackNextVersionName": "next",
   "versionBase": "android_",
   "prBaseUrl": "https://github.com/yourOrg/yourProject/pull/",
-  "pluginDirectory": ".github/config/plugins/"
+  "pluginDirectory": ".github/config/plugins/",
+  "migrateTickets": true,
+  "customReleaseFields": {
+    "customfield_12345": [ { "value": "Android" } ],
+    "customfield_12346": [ "YES" ]
+  },
+  "customRequireQAField": "customfield_12346"
 }
 ```
 
