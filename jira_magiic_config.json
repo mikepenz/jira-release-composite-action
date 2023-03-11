@@ -20,5 +20,6 @@
     "customReleaseFields": {
       "customfield_12345": [ { "value": "Android" } ],
       "customfield_12346": [ "YES" ]
-    }
+    },
+    "customRequireQAField": "customfield_12346"
 }
