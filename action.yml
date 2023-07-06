@@ -42,13 +42,16 @@ runs:
             DM=""
         fi
 
-        java -jar ${{ github.action_path }}/scripts/jira_magic-2.4.4-r8.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
+        java -jar ${{ github.action_path }}/scripts/jira_magic-2.4.5-r8.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
 
         if [[ -e "${{ inputs.cachesDirectory }}/release.txt" ]]; then
           echo "release-ticket-id=$(cat ${{ inputs.cachesDirectory }}/release.txt)" >> $GITHUB_OUTPUT
+          echo "::debug::Release Ticket ID: $(cat ${{ inputs.cachesDirectory }}/release.txt)"
         else
           echo "release-ticket-id=" >> $GITHUB_OUTPUT
+          echo "::debug::No release id found"
         fi
+        echo "::debug::Release Meta Data: $(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)"
         echo "release-version-meta=$(cat ${{ inputs.cachesDirectory }}/releaseMetaData.json)" >> $GITHUB_OUTPUT
       env:
         CHANGELOG: ${{ inputs.changeLog }}
