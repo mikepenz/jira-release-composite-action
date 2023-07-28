@@ -42,7 +42,7 @@ runs:
             DM=""
         fi
 
-        java -jar ${{ github.action_path }}/scripts/jira_magic-2.4.5-r8.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
+        java -jar ${{ github.action_path }}/scripts/jira_magic-2.5.0-r8.jar "${{ inputs.releaseVersion }}" "${{ inputs.jiraToken }}" "${CHANGELOG}" "${{ inputs.projectDirectory }}" "${{ inputs.configurationDirectory }}" "${{ inputs.cachesDirectory }}" "$DM"
 
         if [[ -e "${{ inputs.cachesDirectory }}/release.txt" ]]; then
           echo "release-ticket-id=$(cat ${{ inputs.cachesDirectory }}/release.txt)" >> $GITHUB_OUTPUT
